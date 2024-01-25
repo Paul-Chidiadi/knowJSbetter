@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Styled Todo List</title>
+  </head>
+  <body>
+    <div class="todo-container">
+      <h2>Todo List</h2>
+      <input type="text" id="taskInput" placeholder="Add a new task..." />
+      <button onclick="addTask()">Add</button>
+
+      <div class="completed-section">
+        <h3>Completed Tasks</h3>
+        <ul id="completedTasks">
+          <!-- Completed tasks will be dynamically added here -->
+        </ul>
+      </div>
+
+      <div class="uncompleted-section">
+        <h3>Uncompleted Tasks</h3>
+        <ul id="uncompletedTasks">
+          <!-- Uncompleted tasks will be dynamically added here -->
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      function addTask() {
+        const taskInput = document.getElementById("taskInput");
+        const completedTasks = document.getElementById("completedTasks");
+        const uncompletedTasks = document.getElementById("uncompletedTasks");
+
+        if (taskInput.value.trim() !== "") {
+          const li = document.createElement("li");
+          li.innerHTML = `
+        <span>${taskInput.value}</span>
+        <button onclick="completeTask(this)">Done</button>
+        <button onclick="deleteTask(this)">Delete</button>
+      `;
+
+          // Decide where to append the task based on completion status
+          if (li.querySelector("span").classList.contains("completed")) {
+            completedTasks.appendChild(li);
+          } else {
+            uncompletedTasks.appendChild(li);
+          }
+
+          taskInput.value = "";
+        }
+      }
+
+      function completeTask(button) {
+        const taskSpan = button.previousElementSibling;
+        taskSpan.classList.toggle("completed");
+
+        // Move the task to the appropriate section based on completion status
+        const taskLi = button.parentElement;
+        const completedTasks = document.getElementById("completedTasks");
+        const uncompletedTasks = document.getElementById("uncompletedTasks");
+
+        if (taskSpan.classList.contains("completed")) {
+          completedTasks.appendChild(taskLi);
+        } else {
+          uncompletedTasks.appendChild(taskLi);
+        }
+      }
+
+      function deleteTask(button) {
+        const taskLi = button.parentElement;
+        taskLi.remove();
+      }
+    </script>
+  </body>
+</html>
