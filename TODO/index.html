@@ -27,51 +27,6 @@
       </div>
     </div>
 
-    <script>
-      function addTask() {
-        const taskInput = document.getElementById("taskInput");
-        const completedTasks = document.getElementById("completedTasks");
-        const uncompletedTasks = document.getElementById("uncompletedTasks");
-
-        if (taskInput.value.trim() !== "") {
-          const li = document.createElement("li");
-          li.innerHTML = `
-        <span>${taskInput.value}</span>
-        <button onclick="completeTask(this)">Done</button>
-        <button onclick="deleteTask(this)">Delete</button>
-      `;
-
-          // Decide where to append the task based on completion status
-          if (li.querySelector("span").classList.contains("completed")) {
-            completedTasks.appendChild(li);
-          } else {
-            uncompletedTasks.appendChild(li);
-          }
-
-          taskInput.value = "";
-        }
-      }
-
-      function completeTask(button) {
-        const taskSpan = button.previousElementSibling;
-        taskSpan.classList.toggle("completed");
-
-        // Move the task to the appropriate section based on completion status
-        const taskLi = button.parentElement;
-        const completedTasks = document.getElementById("completedTasks");
-        const uncompletedTasks = document.getElementById("uncompletedTasks");
-
-        if (taskSpan.classList.contains("completed")) {
-          completedTasks.appendChild(taskLi);
-        } else {
-          uncompletedTasks.appendChild(taskLi);
-        }
-      }
-
-      function deleteTask(button) {
-        const taskLi = button.parentElement;
-        taskLi.remove();
-      }
-    </script>
+    <script></script>
   </body>
 </html>
